@@ -27,28 +27,44 @@ public class RegistraEnvio extends javax.swing.JFrame {
     public RegistraEnvio() {
         initComponents();
         /////////Inicializa os combox vazios//////////////////
-       
+
         /////////////////////////////////////////////////////
         CarregaCombos combos = new CarregaCombos();
-        
-        for(MarcaImpBeans marca : combos.MarcaImp()){
+
+        for (MarcaImpBeans marca : combos.MarcaImp()) {
             comboMarca.setSelectedItem(null);
             comboMarca.addItem(marca);
         }
-        for(ModeloBeans model : combos.ModeloImp()){
-             comboModelo.setSelectedIndex(-1);
+        for (ModeloBeans model : combos.ModeloImp()) {
+            comboModelo.setSelectedIndex(-1);
             comboModelo.addItem(model);
         }
-        for(TransportadoraBeans transpot : combos.Transportadora()){
+        for (TransportadoraBeans transpot : combos.Transportadora()) {
             comboTransport.addItem(transpot);
         }
-        for(EmpresaBeans emp : combos.ListarEmpresas()){
+        for (EmpresaBeans emp : combos.ListarEmpresas()) {
             comboDest.addItem(emp);
         }
     }
-    public void Teste(){
+        String variavel = null;
+         int ini;
+    public void Teste() {
+        ini = JOptionPane.YES_OPTION;
         
+            if (ini == JOptionPane.YES_OPTION){
+                textCodigoRemessa.setText(variavel);
+                textCodigoRemessa.setText("");
+                comboMarca.setSelectedItem(null);
+                comboModelo.setSelectedItem(null);
+                textPatrimonio.setText("");
+                textSut.setText("");
+                textDefeito.setText("");
+                textObs.setText("");
+                comboTransport.setSelectedItem(null);
+                comboDest.setSelectedItem(null);
+            }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -226,43 +242,35 @@ public class RegistraEnvio extends javax.swing.JFrame {
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         cadastros cad = new cadastros();
         EnviaManutencaoBeans env = new EnviaManutencaoBeans();
+        int primeiro = 0;
         
-        int ini = JOptionPane.YES_OPTION;
         
-        env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
-        String variavel = textCodigoRemessa.getText();
-        env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
-        env.setMdm_id((ModeloBeans) comboModelo.getSelectedItem());
-        env.setPatrimonio(Integer.parseInt(textPatrimonio.getText()));
-        env.setSut(Integer.parseInt(textSut.getText()));
-        env.setDefeito(textDefeito.getText());
-        env.setObs(textObs.getText());
-        env.setTransporte((TransportadoraBeans) comboTransport.getSelectedItem());
-        env.setDestinatario((EmpresaBeans) comboDest.getSelectedItem());
-        JOptionPane.showConfirmDialog(null, "Deseja cadastrar mais equipamentos ?");
-       
-        cad.CadastrarEnvio(env);
-        
-        textCodigoRemessa.setText("");
-        comboMarca.setSelectedItem(null);
-        comboModelo.setSelectedItem(null);
-        textPatrimonio.setText("");
-        textSut.setText("");
-        textDefeito.setText("");
-        textObs.setText("");
-        comboTransport.setSelectedItem(null);
-        comboDest.setSelectedItem(null);
-        
-        if(ini == JOptionPane.YES_OPTION){
-            textCodigoRemessa.setText(variavel);
+        if (primeiro == 1) {
+            env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
+            variavel = textCodigoRemessa.getText();
+            env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
+            env.setMdm_id((ModeloBeans) comboModelo.getSelectedItem());
+            env.setPatrimonio(Integer.parseInt(textPatrimonio.getText()));
+            env.setSut(Integer.parseInt(textSut.getText()));
+            env.setDefeito(textDefeito.getText());
+            env.setObs(textObs.getText());
+            env.setTransporte((TransportadoraBeans) comboTransport.getSelectedItem());
+            env.setDestinatario((EmpresaBeans) comboDest.getSelectedItem());
+            JOptionPane.showConfirmDialog(null, "Deseja cadastrar mais equipamentos ?");
+            cad.CadastrarEnvio(env);
+            
+            textverificacao.setText(cad.aprovado);
+            
+            JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro equipamento ?");
+            if(ini == JOptionPane.YES_OPTION){
+                Teste();
+            }
+            
+            
         }
-                
-                
-                
-                
-                
-        textverificacao.setText(cad.aprovado);
-     
+
+        
+
     }//GEN-LAST:event_btnGravarActionPerformed
 
     /**
