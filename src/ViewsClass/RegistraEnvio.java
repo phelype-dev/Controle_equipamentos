@@ -36,7 +36,8 @@ public class RegistraEnvio extends javax.swing.JFrame {
             comboMarca.addItem(marca);
         }
         for (ModeloBeans model : combos.ModeloImp()) {
-            comboModelo.setSelectedIndex(-1);
+            comboModelo.removeAllItems();
+            comboModelo.setSelectedItem(null);
             comboModelo.addItem(model);
         }
         for (TransportadoraBeans transpot : combos.Transportadora()) {
@@ -49,9 +50,7 @@ public class RegistraEnvio extends javax.swing.JFrame {
         String variavel = null;
          int ini;
     public void Teste() {
-        ini = JOptionPane.YES_OPTION;
         
-            if (ini == JOptionPane.YES_OPTION){
                 textCodigoRemessa.setText(variavel);
                 textCodigoRemessa.setText("");
                 comboMarca.setSelectedItem(null);
@@ -62,7 +61,6 @@ public class RegistraEnvio extends javax.swing.JFrame {
                 textObs.setText("");
                 comboTransport.setSelectedItem(null);
                 comboDest.setSelectedItem(null);
-            }
     }
 
     /**
@@ -242,12 +240,10 @@ public class RegistraEnvio extends javax.swing.JFrame {
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         cadastros cad = new cadastros();
         EnviaManutencaoBeans env = new EnviaManutencaoBeans();
-        int primeiro = 0;
         
-        
-        if (primeiro == 1) {
             env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
             variavel = textCodigoRemessa.getText();
+            System.out.println("ViewsClass.RegistraEnvio.btnGravarActionPerformed()"+variavel);
             env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
             env.setMdm_id((ModeloBeans) comboModelo.getSelectedItem());
             env.setPatrimonio(Integer.parseInt(textPatrimonio.getText()));
@@ -262,12 +258,12 @@ public class RegistraEnvio extends javax.swing.JFrame {
             textverificacao.setText(cad.aprovado);
             
             JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro equipamento ?");
+            ini = JOptionPane.YES_OPTION;
             if(ini == JOptionPane.YES_OPTION){
                 Teste();
             }
             
             
-        }
 
         
 
