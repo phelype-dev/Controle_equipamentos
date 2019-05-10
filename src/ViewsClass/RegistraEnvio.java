@@ -21,6 +21,10 @@ import model.EnviaManutencaoBeans;
  */
 public class RegistraEnvio extends javax.swing.JFrame {
 
+    int ini;
+    cadastros cad = new cadastros();
+    EnviaManutencaoBeans env = new EnviaManutencaoBeans();
+
     /**
      * Creates new form RegistraEnvio
      */
@@ -47,10 +51,9 @@ public class RegistraEnvio extends javax.swing.JFrame {
             comboDest.addItem(emp);
         }
     }
-        String variavel = null;
-         int ini;
-    public void Teste() {
-        
+    String variavel;
+
+    /*public void MesmoCodRemessa() {
                 textCodigoRemessa.setText(variavel);
                 textCodigoRemessa.setText("");
                 comboMarca.setSelectedItem(null);
@@ -61,8 +64,23 @@ public class RegistraEnvio extends javax.swing.JFrame {
                 textObs.setText("");
                 comboTransport.setSelectedItem(null);
                 comboDest.setSelectedItem(null);
+    }*/
+    public void Primeiro(){
+        
+            env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
+            variavel = textCodigoRemessa.getText();
+            env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
+            env.setMdm_id((ModeloBeans) comboModelo.getSelectedItem());
+            env.setPatrimonio(Integer.parseInt(textPatrimonio.getText()));
+            env.setSut(Integer.parseInt(textSut.getText()));
+            env.setDefeito(textDefeito.getText());
+            env.setObs(textObs.getText());
+            env.setTransporte((TransportadoraBeans) comboTransport.getSelectedItem());
+            env.setDestinatario((EmpresaBeans) comboDest.getSelectedItem());
+            cad.CadastrarEnvio(env);
+            
+            textverificacao.setText(cad.aprovado);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,6 +144,11 @@ public class RegistraEnvio extends javax.swing.JFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Destinatário.:");
 
@@ -238,37 +261,24 @@ public class RegistraEnvio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
-        cadastros cad = new cadastros();
-        EnviaManutencaoBeans env = new EnviaManutencaoBeans();
-        
-            env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
-            variavel = textCodigoRemessa.getText();
-            System.out.println("ViewsClass.RegistraEnvio.btnGravarActionPerformed()"+variavel);
-            env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
-            env.setMdm_id((ModeloBeans) comboModelo.getSelectedItem());
-            env.setPatrimonio(Integer.parseInt(textPatrimonio.getText()));
-            env.setSut(Integer.parseInt(textSut.getText()));
-            env.setDefeito(textDefeito.getText());
-            env.setObs(textObs.getText());
-            env.setTransporte((TransportadoraBeans) comboTransport.getSelectedItem());
-            env.setDestinatario((EmpresaBeans) comboDest.getSelectedItem());
-            JOptionPane.showConfirmDialog(null, "Deseja cadastrar mais equipamentos ?");
-            cad.CadastrarEnvio(env);
-            
-            textverificacao.setText(cad.aprovado);
-            
-            JOptionPane.showConfirmDialog(null, "Deseja cadastrar outro equipamento ?");
-            ini = JOptionPane.YES_OPTION;
-            if(ini == JOptionPane.YES_OPTION){
-                Teste();
-            }
-            
-            
+        Primeiro();
 
-        
+        textCodigoRemessa.setText(variavel);
+        textCodigoRemessa.setText("");
+        comboMarca.setSelectedItem(null);
+        comboModelo.setSelectedItem(null);
+        textPatrimonio.setText("");
+        textSut.setText("");
+        textDefeito.setText("");
+        textObs.setText("");
+        comboTransport.setSelectedItem(null);
+        comboDest.setSelectedItem(null);
+
 
     }//GEN-LAST:event_btnGravarActionPerformed
-
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
     /**
      * @param args the command line arguments
      */
