@@ -44,6 +44,10 @@ public class cadastros {
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error "+ex.getMessage());
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Atenção. Os Combos não podem ficar em branco");
+        }catch(NumberFormatException | ClassCastException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 }

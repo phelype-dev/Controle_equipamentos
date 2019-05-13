@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.PecasManut;
 
 /**
  *
@@ -159,5 +160,33 @@ public class CarregaCombos {
         }catch(ExceptionInInitializerError err){
         }
         return ListTransporte;
+    }
+    public List<PecasManut> Pecas(){
+        Connection conn = Connect_MySql.getConnection();
+        PreparedStatement pst;
+        ResultSet rs;
+        String sql;
+        List<PecasManut> Listpecas = new ArrayList<>();
+        
+        try {
+            sql = "select * from tbl_PecasManut";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                PecasManut pecas = new PecasManut();
+                pecas.setId_pecas(rs.getInt("id_pecas"));
+                pecas.setPeca(rs.getString("nome_peca"));
+                pecas.setValor(rs.getFloat("valor"));
+                pecas.setImagem(rs.getString("imagem"));
+                
+               Listpecas.add(pecas);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error 1");
+        }catch(AbstractMethodError erro){
+            
+        }catch(ExceptionInInitializerError err){
+        }
+        return Pecas();
     }
 }

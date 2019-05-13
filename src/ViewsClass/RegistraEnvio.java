@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ViewsClass;
 
 import model.EmpresaBeans;
@@ -14,17 +9,15 @@ import controller.JtextTamanhos;
 import controller.cadastros;
 import java.awt.Color;
 import model.EnviaManutencaoBeans;
-
+import org.w3c.dom.css.RGBColor;
 /**
  *
  * @author phelype
  */
 public class RegistraEnvio extends javax.swing.JFrame {
-
     int ini;
     cadastros cad = new cadastros();
     EnviaManutencaoBeans env = new EnviaManutencaoBeans();
-
     /**
      * Creates new form RegistraEnvio
      */
@@ -74,11 +67,9 @@ public class RegistraEnvio extends javax.swing.JFrame {
             
             textverificacao.setText("Atenção verifique os campos em branco !");
             textverificacao.setOpaque(false);
-          
             textverificacao.setForeground(Color.red);
             
         }else{
-            
             env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
             variavel = textCodigoRemessa.getText();
             env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
@@ -226,6 +217,7 @@ public class RegistraEnvio extends javax.swing.JFrame {
         Primeiro();
         
         textCodigoRemessa.setText(variavel);
+        textCodigoRemessa.setBackground(Color.getHSBColor(255, 239, 219));
         comboMarca.setSelectedItem(null);
         comboModelo.setSelectedItem(null);
         textPatrimonio.setText("");

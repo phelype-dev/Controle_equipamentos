@@ -140,8 +140,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnvioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AcompanhaEnvio ac = new AcompanhaEnvio();
-        ac.setVisible(true);
+        /*AcompanhaEnvio ac = new AcompanhaEnvio();
+        ac.setVisible(true);*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
