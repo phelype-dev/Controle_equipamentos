@@ -10,9 +10,9 @@ import model.MarcaImpBeans;
 import model.ModeloBeans;
 import model.TransportadoraBeans;
 import controller.CarregaCombos;
+import controller.JtextTamanhos;
 import controller.cadastros;
-import javafx.scene.control.ButtonBar;
-import javax.swing.JOptionPane;
+import java.awt.Color;
 import model.EnviaManutencaoBeans;
 
 /**
@@ -30,8 +30,10 @@ public class RegistraEnvio extends javax.swing.JFrame {
      */
     public RegistraEnvio() {
         initComponents();
-        /////////Inicializa os combox vazios//////////////////
-
+        /////////Set tamanho //////////////////
+        textCodigoRemessa.setDocument(new JtextTamanhos(6));
+        textPatrimonio.setDocument(new JtextTamanhos(5));
+        textSut.setDocument(new JtextTamanhos(5));
         /////////////////////////////////////////////////////
         CarregaCombos combos = new CarregaCombos();
 
@@ -40,7 +42,6 @@ public class RegistraEnvio extends javax.swing.JFrame {
             comboMarca.addItem(marca);
         }
         for (ModeloBeans model : combos.ModeloImp()) {
-            comboModelo.removeAllItems();
             comboModelo.setSelectedItem(null);
             comboModelo.addItem(model);
         }
@@ -51,8 +52,9 @@ public class RegistraEnvio extends javax.swing.JFrame {
             comboDest.addItem(emp);
         }
     }
+    ///Variavel que recebe o valor do textCodRemesa////
     String variavel;
-
+    //////////////////////////////////////////////////
     /*public void MesmoCodRemessa() {
                 textCodigoRemessa.setText(variavel);
                 textCodigoRemessa.setText("");
@@ -66,7 +68,17 @@ public class RegistraEnvio extends javax.swing.JFrame {
                 comboDest.setSelectedItem(null);
     }*/
     public void Primeiro(){
-        
+        if(textCodigoRemessa.getText().equalsIgnoreCase("") || comboMarca.getSelectedItem() == null ||
+                comboModelo.getSelectedItem() == null || textPatrimonio.getText().equalsIgnoreCase("") || textSut.getText().equalsIgnoreCase("") ||
+                textDefeito.getText().equalsIgnoreCase("")){
+            
+            textverificacao.setText("Atenção verifique os campos em branco !");
+            textverificacao.setOpaque(false);
+          
+            textverificacao.setForeground(Color.red);
+            
+        }else{
+            
             env.setCod_remesa(Integer.parseInt(textCodigoRemessa.getText()));
             variavel = textCodigoRemessa.getText();
             env.setMdi_imp((MarcaImpBeans) comboMarca.getSelectedItem());
@@ -80,6 +92,7 @@ public class RegistraEnvio extends javax.swing.JFrame {
             cad.CadastrarEnvio(env);
             
             textverificacao.setText(cad.aprovado);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,26 +128,55 @@ public class RegistraEnvio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Envio");
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Código  remessa.:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(12, 16, 110, 17);
+        getContentPane().add(textCodigoRemessa);
+        textCodigoRemessa.setBounds(158, 10, 130, 29);
 
         jLabel2.setText("Marca Impressora.:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(14, 55, 120, 17);
 
         comboMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        getContentPane().add(comboMarca);
+        comboMarca.setBounds(158, 49, 130, 29);
 
         jLabel4.setText("Modelo Impressora.:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(14, 92, 130, 20);
 
         comboModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        getContentPane().add(comboModelo);
+        comboModelo.setBounds(158, 88, 130, 29);
 
         jLabel5.setText("Patrimônio.:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 133, 80, 17);
+        getContentPane().add(textPatrimonio);
+        textPatrimonio.setBounds(158, 127, 130, 29);
 
         jLabel6.setText("Defeito.:");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(10, 211, 60, 17);
+        getContentPane().add(textDefeito);
+        textDefeito.setBounds(158, 205, 130, 29);
 
         jLabel8.setText("Transporte.:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(10, 250, 80, 17);
 
         jLabel7.setText("Observações.:");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(10, 322, 90, 17);
 
         jScrollPane1.setViewportView(textObs);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 343, 300, 140);
 
         btnGravar.setText("Gavar");
         btnGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +184,8 @@ public class RegistraEnvio extends javax.swing.JFrame {
                 btnGravarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGravar);
+        btnGravar.setBounds(10, 493, 300, 31);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,122 +193,39 @@ public class RegistraEnvio extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCancelar);
+        btnCancelar.setBounds(10, 532, 300, 31);
 
         jLabel9.setText("Destinatário.:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(10, 289, 90, 17);
 
         comboDest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        getContentPane().add(comboDest);
+        comboDest.setBounds(158, 283, 130, 29);
 
         comboTransport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        getContentPane().add(comboTransport);
+        comboTransport.setBounds(158, 244, 130, 29);
 
         jLabel3.setText("Sut.:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 172, 41, 17);
+        getContentPane().add(textSut);
+        textSut.setBounds(158, 166, 130, 29);
 
         textverificacao.setText("Status.:");
+        getContentPane().add(textverificacao);
+        textverificacao.setBounds(10, 568, 280, 20);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textverificacao)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                            .addComponent(textCodigoRemessa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDest, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboTransport, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textSut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(comboModelo, 0, 130, Short.MAX_VALUE)
-                                .addComponent(comboMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textCodigoRemessa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textSut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTransport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboDest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(10, 10, 10)
-                .addComponent(jLabel7)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnGravar)
-                .addGap(8, 8, 8)
-                .addComponent(btnCancelar)
-                .addGap(18, 18, 18)
-                .addComponent(textverificacao)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        setSize(new java.awt.Dimension(341, 621));
+        setSize(new java.awt.Dimension(323, 644));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         Primeiro();
-
+        
         textCodigoRemessa.setText(variavel);
-        textCodigoRemessa.setText("");
         comboMarca.setSelectedItem(null);
         comboModelo.setSelectedItem(null);
         textPatrimonio.setText("");
@@ -273,8 +234,6 @@ public class RegistraEnvio extends javax.swing.JFrame {
         textObs.setText("");
         comboTransport.setSelectedItem(null);
         comboDest.setSelectedItem(null);
-
-
     }//GEN-LAST:event_btnGravarActionPerformed
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
