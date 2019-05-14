@@ -103,6 +103,11 @@ public class Home extends javax.swing.JFrame {
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(330, 10, 140, 110);
 
@@ -143,6 +148,11 @@ public class Home extends javax.swing.JFrame {
         /*AcompanhaEnvio ac = new AcompanhaEnvio();
         ac.setVisible(true);*/
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Manutenção manut = new Manutenção();
+        manut.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

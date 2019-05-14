@@ -12,6 +12,9 @@ import model.EnviaManutencaoBeans;
 import Connect_MySql.Connect_MySql;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javafx.scene.input.DataFormat;
 
 /**
  *
@@ -307,6 +310,14 @@ public final class Manutenção extends javax.swing.JFrame {
            textId.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 0).toString());
            textCodRemesa.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 1).toString());
            textMarca.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 2).toString());
+           textModelo.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 3).toString());
+           textPatrimonio.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 4).toString());
+           textSut.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 5).toString());
+           textDefeito.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 6).toString());
+           textObs.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 7).toString().toString());
+           textData.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 8).toString());
+           textTransportadora.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(),9).toString());
+           textDestinatario.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 10).toString());
        }
     }//GEN-LAST:event_tblEnviadosMouseClicked
 
