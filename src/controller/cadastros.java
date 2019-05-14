@@ -1,14 +1,10 @@
-
 package controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.EnviaManutencaoBeans;
-
 /**
  *
  * @author phelype
@@ -39,9 +35,7 @@ public class cadastros {
             pst.setInt(9, envio.getTransporte().getId_trans());
             pst.setInt(10, envio.getDestinatario().getId_emp());
             pst.execute();
-            
             aprovado = "Cadastrado com sucesso!";
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error "+ex.getMessage());
         }catch(NullPointerException e){

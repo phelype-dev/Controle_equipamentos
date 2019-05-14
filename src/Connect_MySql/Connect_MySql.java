@@ -24,7 +24,7 @@ public class Connect_MySql {
             stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
             rs = stm.executeQuery(sql);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao executar EXECUTASQL" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao executar EXECUTA SQL" + ex.getMessage());
         }
     }
 

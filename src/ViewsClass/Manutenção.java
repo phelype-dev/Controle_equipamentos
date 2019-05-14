@@ -6,18 +6,21 @@
 package ViewsClass;
 
 import controller.CarregaTabelas;
+import javax.swing.table.DefaultTableModel;
+import model.EnviaManutencaoBeans;
 
 /**
  *
  * @author phelype
  */
-public class Manutenção extends javax.swing.JFrame {
+public final class Manutenção extends javax.swing.JFrame {
 
     /**
      * Creates new form Manutenção
      */
     public Manutenção() {
         initComponents();
+        ListarEnvios();
     }
 
     /**
@@ -241,10 +244,28 @@ public class Manutenção extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(995, 688));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+   public void ListarEnvios(){
+        DefaultTableModel table = (DefaultTableModel) tblEnviados.getModel();
+        CarregaTabelas tbls = new CarregaTabelas();
+        table.setNumRows(0);
+        for(EnviaManutencaoBeans env : tbls.TabelaEnvio()){
+            table.addRow(new Object[]{
+                env.getId(),
+                env.getCod_remesa(),
+                env.getMdi_imp(),
+                env.getMdm_id(),
+                env.getPatrimonio(),
+                env.getSut(),
+                env.getDefeito(),
+                env.getObs(),
+                env.getData_envio(),
+                env.getTransporte(),
+                env.getDestinatario(),
+            });
+            }
+        }
     private void btnRegistraEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraEnvActionPerformed
-        CarregaTabelas n = new CarregaTabelas();
-        System.out.println("ViewsClass.Manutenção.btnRegistraEnvActionPerformed()" +n.TabelaEnvio());
+      
     }//GEN-LAST:event_btnRegistraEnvActionPerformed
 
     /**
