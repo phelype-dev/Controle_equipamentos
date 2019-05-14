@@ -6,14 +6,6 @@
 package ViewsClass;
 
 import controller.Autentica_login;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Label;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import model.LoginBeans;
 
 /**
  *
@@ -37,7 +29,7 @@ public class Home extends javax.swing.JFrame {
         Login.log = textUser.getName();
         textUser.setEnabled(true);
         Autentica_login a = new Autentica_login();
-        textUser.setText("Usuário.: "+a.lo);
+        textUser.setText("Usuário.: "+Login.log);
     }
     
     
