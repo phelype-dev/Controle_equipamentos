@@ -31,15 +31,13 @@ public class Home extends javax.swing.JFrame {
                   
     
     }
+    ///responsavel por setar o nome do usuario logado////
+    ////Falta fazer funcionar////////////////////
     public void SetarNome(){
         Login.log = textUser.getName();
-      textUser.setEnabled(true);
+        textUser.setEnabled(true);
         Autentica_login a = new Autentica_login();
-        textUser.setText("Usuário.: "+Login.log);
-        System.out.println("ClassHome.: "+textUser.getText());
-        
-  
-                  
+        textUser.setText("Usuário.: "+a.lo);
     }
     
     
