@@ -20,6 +20,8 @@ public class Connect_MySql {
     public Statement stm;
 
     public void executaSQL(String sql) {
+        
+        
         try {
             stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
             rs = stm.executeQuery(sql);

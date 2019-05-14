@@ -6,8 +6,12 @@
 package ViewsClass;
 
 import controller.CarregaTabelas;
+import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 import model.EnviaManutencaoBeans;
+import Connect_MySql.Connect_MySql;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -21,6 +25,7 @@ public final class Manutenção extends javax.swing.JFrame {
     public Manutenção() {
         initComponents();
         ListarEnvios();
+        
     }
 
     /**
@@ -69,8 +74,12 @@ public final class Manutenção extends javax.swing.JFrame {
         setResizable(false);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensSystem/buscar-png-4(1).png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        tblEnviados.setBackground(new java.awt.Color(255, 255, 255));
         tblEnviados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -80,7 +89,7 @@ public final class Manutenção extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -90,17 +99,14 @@ public final class Manutenção extends javax.swing.JFrame {
         tblEnviados.setToolTipText("");
         tblEnviados.setSelectionBackground(new java.awt.Color(255, 255, 255));
         tblEnviados.setSelectionForeground(new java.awt.Color(255, 193, 37));
+        tblEnviados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEnviadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEnviados);
         if (tblEnviados.getColumnModel().getColumnCount() > 0) {
             tblEnviados.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tblEnviados.getColumnModel().getColumn(1).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(2).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(3).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(4).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(5).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(6).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(7).setResizable(false);
-            tblEnviados.getColumnModel().getColumn(8).setResizable(false);
         }
 
         tblHistorioco.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,49 +127,49 @@ public final class Manutenção extends javax.swing.JFrame {
 
         jLabel1.setText("ID");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 10, 20, 16);
+        jLabel1.setBounds(10, 10, 20, 17);
         jPanel1.add(textId);
-        textId.setBounds(10, 30, 40, 24);
+        textId.setBounds(10, 30, 40, 29);
 
         jLabel2.setText("Cód Remesa.:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 60, 100, 16);
+        jLabel2.setBounds(10, 60, 100, 17);
         jPanel1.add(textCodRemesa);
-        textCodRemesa.setBounds(10, 80, 110, 24);
+        textCodRemesa.setBounds(10, 80, 110, 29);
 
         jLabel3.setText("Marca.:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 110, 50, 16);
+        jLabel3.setBounds(10, 110, 50, 17);
         jPanel1.add(textMarca);
-        textMarca.setBounds(10, 130, 110, 24);
+        textMarca.setBounds(10, 130, 110, 29);
 
         jLabel4.setText("Modelo.:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 160, 60, 16);
+        jLabel4.setBounds(10, 160, 60, 17);
         jPanel1.add(textModelo);
-        textModelo.setBounds(10, 180, 110, 24);
+        textModelo.setBounds(10, 180, 110, 29);
 
         jLabel5.setText("Patrimônio.:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 210, 90, 16);
+        jLabel5.setBounds(10, 210, 90, 17);
         jPanel1.add(textPatrimonio);
-        textPatrimonio.setBounds(10, 230, 110, 24);
+        textPatrimonio.setBounds(10, 230, 110, 29);
 
         jLabel6.setText("SUT.:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 260, 50, 16);
+        jLabel6.setBounds(10, 260, 50, 17);
         jPanel1.add(textSut);
-        textSut.setBounds(10, 280, 110, 24);
+        textSut.setBounds(10, 280, 110, 29);
 
         jLabel7.setText("Defeito.:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 310, 60, 16);
+        jLabel7.setBounds(10, 310, 60, 17);
         jPanel1.add(textDefeito);
-        textDefeito.setBounds(10, 330, 110, 24);
+        textDefeito.setBounds(10, 330, 110, 29);
 
         jLabel8.setText("Obs.:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(10, 360, 80, 16);
+        jLabel8.setBounds(10, 360, 80, 17);
 
         jScrollPane3.setViewportView(textObs);
 
@@ -172,21 +178,21 @@ public final class Manutenção extends javax.swing.JFrame {
 
         jLabel9.setText("Data envio.:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(10, 440, 100, 16);
+        jLabel9.setBounds(10, 440, 100, 17);
         jPanel1.add(textData);
-        textData.setBounds(10, 460, 100, 24);
+        textData.setBounds(10, 460, 100, 29);
 
         jLabel10.setText("Transportadora.:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 490, 120, 16);
+        jLabel10.setBounds(10, 490, 120, 17);
         jPanel1.add(textTransportadora);
-        textTransportadora.setBounds(10, 510, 120, 24);
+        textTransportadora.setBounds(10, 510, 120, 29);
 
         jLabel11.setText("Destinatário.:");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(10, 540, 100, 16);
+        jLabel11.setBounds(10, 540, 100, 17);
         jPanel1.add(textDestinatario);
-        textDestinatario.setBounds(10, 560, 120, 24);
+        textDestinatario.setBounds(10, 560, 120, 29);
 
         btnRegistraEnv.setText("Registrar Manutenção");
         btnRegistraEnv.setHideActionText(true);
@@ -248,7 +254,27 @@ public final class Manutenção extends javax.swing.JFrame {
         DefaultTableModel table = (DefaultTableModel) tblEnviados.getModel();
         CarregaTabelas tbls = new CarregaTabelas();
         table.setNumRows(0);
-        for(EnviaManutencaoBeans env : tbls.TabelaEnvio()){
+        for(EnviaManutencaoBeans env : tbls.List()){
+            table.addRow(new Object[]{
+                env.getId(),
+                env.getCod_remesa(),
+                env.getMdi_imp(),
+                env.getMdm_id(),
+                env.getPatrimonio(),
+                env.getSut(),
+                env.getDefeito(),
+                env.getObs(),
+                env.getData_envio(),
+                env.getTransporte(),
+                env.getDestinatario(),
+            });
+            }
+        }
+   public void Consulta(String valor){
+        DefaultTableModel table = (DefaultTableModel) tblEnviados.getModel();
+        CarregaTabelas tbls = new CarregaTabelas();
+        table.setNumRows(0);
+        for(EnviaManutencaoBeans env : tbls.BuscaTabela(valor)){
             table.addRow(new Object[]{
                 env.getId(),
                 env.getCod_remesa(),
@@ -267,6 +293,22 @@ public final class Manutenção extends javax.swing.JFrame {
     private void btnRegistraEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraEnvActionPerformed
       
     }//GEN-LAST:event_btnRegistraEnvActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        Consulta(textBusca.getText());
+        
+           
+            
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblEnviadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnviadosMouseClicked
+       if(tblEnviados.getSelectedRow() != -1){
+           textId.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 0).toString());
+           textCodRemesa.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 1).toString());
+           textMarca.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 2).toString());
+       }
+    }//GEN-LAST:event_tblEnviadosMouseClicked
 
     /**
      * @param args the command line arguments
