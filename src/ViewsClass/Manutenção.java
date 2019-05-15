@@ -25,9 +25,12 @@ public final class Manutenção extends javax.swing.JFrame {
     /**
      * Creates new form Manutenção
      */
+     CarregaTabelas tbl = new CarregaTabelas();
     public Manutenção() {
         initComponents();
         ListarEnvios();
+      
+        textMensagem.setText(tbl.mensagem);
         
     }
 
@@ -71,6 +74,7 @@ public final class Manutenção extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         textDestinatario = new javax.swing.JTextField();
         btnRegistraEnv = new javax.swing.JButton();
+        textMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manutenção Equipamentos.");
@@ -107,6 +111,11 @@ public final class Manutenção extends javax.swing.JFrame {
                 tblEnviadosMouseClicked(evt);
             }
         });
+        tblEnviados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblEnviadosKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEnviados);
         if (tblEnviados.getColumnModel().getColumnCount() > 0) {
             tblEnviados.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -114,13 +123,10 @@ public final class Manutenção extends javax.swing.JFrame {
 
         tblHistorioco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID.:", "", "Title 3", "Title 4"
             }
         ));
         jScrollPane2.setViewportView(tblHistorioco);
@@ -130,50 +136,65 @@ public final class Manutenção extends javax.swing.JFrame {
 
         jLabel1.setText("ID");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 10, 20, 17);
+        jLabel1.setBounds(10, 10, 20, 16);
+
+        textId.setEnabled(false);
         jPanel1.add(textId);
-        textId.setBounds(10, 30, 40, 29);
+        textId.setBounds(10, 30, 40, 24);
 
         jLabel2.setText("Cód Remesa.:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 60, 100, 17);
+        jLabel2.setBounds(10, 60, 100, 16);
+
+        textCodRemesa.setEnabled(false);
         jPanel1.add(textCodRemesa);
-        textCodRemesa.setBounds(10, 80, 110, 29);
+        textCodRemesa.setBounds(10, 80, 110, 24);
 
         jLabel3.setText("Marca.:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 110, 50, 17);
+        jLabel3.setBounds(10, 110, 50, 16);
+
+        textMarca.setEnabled(false);
         jPanel1.add(textMarca);
-        textMarca.setBounds(10, 130, 110, 29);
+        textMarca.setBounds(10, 130, 110, 24);
 
         jLabel4.setText("Modelo.:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 160, 60, 17);
+        jLabel4.setBounds(10, 160, 60, 16);
+
+        textModelo.setEnabled(false);
         jPanel1.add(textModelo);
-        textModelo.setBounds(10, 180, 110, 29);
+        textModelo.setBounds(10, 180, 110, 24);
 
         jLabel5.setText("Patrimônio.:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 210, 90, 17);
+        jLabel5.setBounds(10, 210, 90, 16);
+
+        textPatrimonio.setEnabled(false);
         jPanel1.add(textPatrimonio);
-        textPatrimonio.setBounds(10, 230, 110, 29);
+        textPatrimonio.setBounds(10, 230, 110, 24);
 
         jLabel6.setText("SUT.:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 260, 50, 17);
+        jLabel6.setBounds(10, 260, 50, 16);
+
+        textSut.setEnabled(false);
         jPanel1.add(textSut);
-        textSut.setBounds(10, 280, 110, 29);
+        textSut.setBounds(10, 280, 110, 24);
 
         jLabel7.setText("Defeito.:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 310, 60, 17);
+        jLabel7.setBounds(10, 310, 60, 16);
+
+        textDefeito.setEnabled(false);
         jPanel1.add(textDefeito);
-        textDefeito.setBounds(10, 330, 110, 29);
+        textDefeito.setBounds(10, 330, 110, 24);
 
         jLabel8.setText("Obs.:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(10, 360, 80, 17);
+        jLabel8.setBounds(10, 360, 80, 16);
 
+        textObs.setEnabled(false);
         jScrollPane3.setViewportView(textObs);
 
         jPanel1.add(jScrollPane3);
@@ -181,21 +202,27 @@ public final class Manutenção extends javax.swing.JFrame {
 
         jLabel9.setText("Data envio.:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(10, 440, 100, 17);
+        jLabel9.setBounds(10, 440, 100, 16);
+
+        textData.setEnabled(false);
         jPanel1.add(textData);
-        textData.setBounds(10, 460, 100, 29);
+        textData.setBounds(10, 460, 100, 24);
 
         jLabel10.setText("Transportadora.:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 490, 120, 17);
+        jLabel10.setBounds(10, 490, 120, 16);
+
+        textTransportadora.setEnabled(false);
         jPanel1.add(textTransportadora);
-        textTransportadora.setBounds(10, 510, 120, 29);
+        textTransportadora.setBounds(10, 510, 120, 24);
 
         jLabel11.setText("Destinatário.:");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(10, 540, 100, 17);
+        jLabel11.setBounds(10, 540, 100, 16);
+
+        textDestinatario.setEnabled(false);
         jPanel1.add(textDestinatario);
-        textDestinatario.setBounds(10, 560, 120, 29);
+        textDestinatario.setBounds(10, 560, 120, 24);
 
         btnRegistraEnv.setText("Registrar Manutenção");
         btnRegistraEnv.setHideActionText(true);
@@ -206,6 +233,8 @@ public final class Manutenção extends javax.swing.JFrame {
             }
         });
 
+        textMensagem.setText("Mensagens.:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,40 +242,42 @@ public final class Manutenção extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(textBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistraEnv)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegistraEnv))))
+                        .addGap(6, 6, 6)
+                        .addComponent(textMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistraEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegistraEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
         );
 
@@ -270,7 +301,9 @@ public final class Manutenção extends javax.swing.JFrame {
                 env.getData_envio(),
                 env.getTransporte(),
                 env.getDestinatario(),
+                
             });
+            textMensagem.setText(tbls.mensagem);
             }
         }
    public void Consulta(String valor){
@@ -292,6 +325,7 @@ public final class Manutenção extends javax.swing.JFrame {
                 env.getDestinatario(),
             });
             }
+        textMensagem.setText(tbls.mensagem);
         }
     private void btnRegistraEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraEnvActionPerformed
       
@@ -299,6 +333,7 @@ public final class Manutenção extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Consulta(textBusca.getText());
+        textMensagem.setText(tbl.mensagem);
         
            
             
@@ -320,6 +355,23 @@ public final class Manutenção extends javax.swing.JFrame {
            textDestinatario.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 10).toString());
        }
     }//GEN-LAST:event_tblEnviadosMouseClicked
+
+    private void tblEnviadosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEnviadosKeyReleased
+     
+        if(tblEnviados.getSelectedRow() != -1){
+           textId.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 0).toString());
+           textCodRemesa.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 1).toString());
+           textMarca.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 2).toString());
+           textModelo.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 3).toString());
+           textPatrimonio.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 4).toString());
+           textSut.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 5).toString());
+           textDefeito.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 6).toString());
+           textObs.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 7).toString());
+           textData.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 8).toString());
+           textTransportadora.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(),9).toString());
+           textDestinatario.setText(tblEnviados.getValueAt(tblEnviados.getSelectedRow(), 10).toString());
+       }
+    }//GEN-LAST:event_tblEnviadosKeyReleased
 
     /**
      * @param args the command line arguments
@@ -383,6 +435,7 @@ public final class Manutenção extends javax.swing.JFrame {
     private javax.swing.JTextField textDestinatario;
     private javax.swing.JTextField textId;
     private javax.swing.JTextField textMarca;
+    private javax.swing.JLabel textMensagem;
     private javax.swing.JTextField textModelo;
     private javax.swing.JEditorPane textObs;
     private javax.swing.JTextField textPatrimonio;

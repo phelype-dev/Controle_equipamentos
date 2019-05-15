@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
  * @author Phelype
  */
 public class CarregaTabelas {
+    public String mensagem;
     public List<EnviaManutencaoBeans> List(){
         Connection con = Connect_MySql.getConnection();
         ResultSet rs;
@@ -98,7 +99,11 @@ public class CarregaTabelas {
             rs = pst.executeQuery();
             
             while(rs.next()){
-                EnviaManutencaoBeans manut = new EnviaManutencaoBeans();
+                if(!rs.next()){
+                    mensagem = "Ainda não existe dados cadastrados !";
+                    JOptionPane.showMessageDialog(null, mensagem);
+                }else{
+                   EnviaManutencaoBeans manut = new EnviaManutencaoBeans();
                 manut.setId(rs.getInt("id"));
                 manut.setCod_remesa(rs.getInt("cod_remesa"));
                 MarcaImpBeans marca = new MarcaImpBeans();
@@ -119,7 +124,8 @@ public class CarregaTabelas {
                 emp.setEmpresa(rs.getString("empresa"));
                 manut.setDestinatario(emp);
                 
-                funcL.add(manut);
+                funcL.add(manut); 
+                }
             }
         } catch (SQLException ex) {
             funcL.isEmpty();
@@ -127,5 +133,4 @@ public class CarregaTabelas {
         }
         return funcL;
     }
-    
 }
